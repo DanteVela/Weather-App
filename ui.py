@@ -14,6 +14,19 @@ class WeatherApp(tk.Tk):
         self.title("No-API-Key Weather")
         self.geometry("500x300")
 
+        # Load window icon
+        icon_dir = os.path.join(os.path.dirname(__file__), "icons")
+        # Windows .ico
+        ico = os.path.join(icon_dir, "weather.ico")
+        if os.path.exists(ico):
+            self.iconbitmap(ico)
+        # Cross-platform .png
+        png = os.path.join(icon_dir, "weather.png")
+        if os.path.exists(png):
+            img = tk.PhotoImage(file=png)
+            self.iconphoto(False, img)
+            self._icon_ref = img
+
         # Inputs
         tk.Label(self, text="State:").pack(pady=(10, 0))
         self.state_entry = tk.Entry(self)
@@ -30,7 +43,7 @@ class WeatherApp(tk.Tk):
         self.result.pack()
 
         # Icon manager
-        icon_dir = os.path.join(os.path.dirname(__file__), "icons")
+        # icon_dir = os.path.join(os.path.dirname(__file__), "icons")
         self.icon_mgr = IconManager(icon_dir)
 
         self.icon_label = tk.Label(self, image=self.icon_mgr.default_icon)
